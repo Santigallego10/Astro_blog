@@ -1,0 +1,36 @@
+---
+import Card from "../../components/Card.astro";
+import Header from "../../components/Header.astro";
+
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("tips")).sort(
+    (a, b) => a.data.date.valueOf() - b.data.date.valueOf()
+);  
+
+console.log(posts)
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Blog astro</title>
+  </head>
+  <body>
+	<Header title="Santi.Dev Blog"/>
+	<div class="p-4">
+        {
+            posts.map((post) => (
+                <Card 
+            title={post?.data?.title}
+            time={post?.data?.date}
+            tags={post?.data?.tags}
+            slug={post.slug}
+          />
+            ))
+        }
+	</div>
+  </body>
+</html>

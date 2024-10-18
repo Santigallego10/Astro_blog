@@ -2,7 +2,7 @@
 import Card from "../components/Card.astro";
 import Header from "../components/Header.astro";
 
-const allPosts = await Astro.glob("../content/*.md");
+const allPosts = await Astro.glob("../content/tips/*.md");
 
 ---
 
@@ -22,6 +22,7 @@ const allPosts = await Astro.glob("../content/*.md");
         title={item?.frontmatter?.title}
         time={item?.frontmatter?.date}
         tags={item?.frontmatter?.tags}
+        slug={item?.frontmatter?.slug}
       />
 		))
 	}
