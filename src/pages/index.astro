@@ -1,17 +1,30 @@
 ---
 import Card from "../components/Card.astro";
+import Header from "../components/Header.astro";
 
+const allPosts = await Astro.glob("../content/*.md");
 
 ---
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<Card title="Text" time="11 de abril" tags={['1','2']}/>
-	</body>
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Blog astro</title>
+  </head>
+  <body>
+	<Header title="Santi.Dev Blog"/>
+	<div class="p-4">
+	{
+		allPosts.map((item) => (
+			<Card 
+        title={item?.frontmatter?.title}
+        time={item?.frontmatter?.date}
+        tags={item?.frontmatter?.tags}
+      />
+		))
+	}
+	</div>
+  </body>
 </html>
